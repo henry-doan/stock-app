@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { Header, Form, Item, Container, Grid } from 'semantic-ui-react'
 import axios from 'axios';
+require('dotenv').config()
+
 
 const App = () => {
   const [stock, setStock] = useState("")
   const [stockInfo, setStockInfo] = useState([])
 
   const handleSubmit = () => {
-    axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=`)
+    axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=${process.env.REACT_APP_ACCESS_KEY}`)
       .then( res => {
         setStockInfo(Object.values(res.data)[0])
       })
